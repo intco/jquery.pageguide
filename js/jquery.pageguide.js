@@ -348,7 +348,7 @@
                     $guide = (typeof guide === 'string') ? $(guide) : null;
 
                 if ($guide) {
-                    if (!$guide.size()) return this;
+                    if (!$guide.length) return this;
 
                     guide = {
                         title: $guide.data('tourtitle'),
@@ -370,7 +370,7 @@
                         guide.steps.push(step);
                     });
                 } else {
-                    $guide = ((guide.id && $('#' + guide.id).size()) ? $('#' + guide.id).empty() : $('<ol/>', {
+                    $guide = ((guide.id && $('#' + guide.id).length) ? $('#' + guide.id).empty() : $('<ol/>', {
                       id: guide.id || 'pageGuide' + PageGuide.uid(),
                       'class': 'pageguide-guide'
                     })).data('tourtitle', guide.title);
@@ -516,7 +516,7 @@
                  * If -n < x < 0, then the result of x % n will be x, which is
                  * negative. To get a positive remainder, compute (x + n) % n.
                  */
-                var newIdx = (this.curIdx + this.$visibleItems.size() - 1) % this.$visibleItems.size();
+                var newIdx = (this.curIdx + this.$visibleItems.length - 1) % this.$visibleItems.length;
 
                 this.$wrapper.trigger('previous.pageguide');
                 this.showStep(newIdx, 1);
@@ -532,7 +532,7 @@
             next: function() {
                 if (!$('body').is('.pageguide-open')) return this;
 
-                var newIdx = (this.curIdx + 1) % this.$visibleItems.size();
+                var newIdx = (this.curIdx + 1) % this.$visibleItems.length;
 
                 this.$wrapper.trigger('next.pageguide');
                 this.showStep(newIdx, -1);
@@ -870,7 +870,7 @@
                     $(this).data('idx', i);
                 });
 
-                if ((this.settings.autoAdvanceInterval || this.settings.autoStart) && this.$visibleItems.size() > 0) {
+                if ((this.settings.autoAdvanceInterval || this.settings.autoStart) && this.$visibleItems.length > 0) {
                     if (this.settings.autoStartDelay) {
                         setTimeout($.proxy(function () {
                             this.showStep(0);
